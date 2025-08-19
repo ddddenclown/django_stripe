@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Магазин</title>
+  </head>
+  <body>
+    <h1>Товары</h1>
+    <ul>
+      {% for item in items %}
+      <li>
+        <a href="/item/{{ item.id }}/">{{ item.name }}</a> — {{ item.price_major }} {{ item.currency|upper }}
+      </li>
+      {% empty %}
+      <li>Нет товаров</li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

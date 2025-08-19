@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ item.name }}</title>
+  </head>
+  <body>
+    <h1>{{ item.name }}</h1>
+    <p>{{ item.description }}</p>
+    <p>Цена: {{ item.price_major }} {{ item.currency|upper }}</p>
+
+    <button id="buy-btn">Buy</button>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      const stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+      const buyBtn = document.getElementById('buy-btn');
+      buyBtn.addEventListener('click', async () => {
+        try {
+          const resp = await fetch(`/buy/{{ item.id }}/`);
+          const data = await resp.json();
+          if (data.id) {
+            const { error } = await stripe.redirectToCheckout({ sessionId: data.id });
+            if (error) alert(error.message);
+          } else if (data.error) {
+            alert(data.error);
+          }
+        } catch (e) {
+          alert('Network error');
+        }
+      });
+    </script>
+  </body>
+</html>
