@@ -66,7 +66,7 @@ python manage.py runserver 0.0.0.0:8000
 ## Stripe
 - Используйте тестовые ключи из Dashboard: `pk_test_...` / `sk_test_...`
 - В режиме разработки домен может быть `http://localhost:8000`
-- Если включите Automatic Tax в Stripe, параметр `automatic_tax` можно добавить в создание Session
+- При необходимости можно добавить `automatic_tax` в параметры сессии Stripe Checkout
 
 ## Переменные окружения
 - `DEBUG` — по умолчанию True
@@ -79,19 +79,19 @@ python manage.py runserver 0.0.0.0:8000
   ```powershell
   python manage.py test -v 2
   ```
-- Юнит‑тесты: модели (`shop/tests/test_models.py`) и вьюхи c моками Stripe (`shop/tests/test_views.py`).
+- Юнит‑тесты: модели (`shop/tests/test_models.py`) и вьюхи с моками Stripe (`shop/tests/test_views.py`).
 - Интеграционные тесты Stripe (`shop/tests/test_stripe_integration.py`):
-  - Запускаются ТОЛЬКО если в окружении задан `STRIPE_SECRET_KEY` со значением, начинающимся на `sk_test_`. Иначе помечаются как skipped.
-  - Пример запуска с ключами:
+  - Запускаются только если в окружении задан `STRIPE_SECRET_KEY` со значением, начинающимся на `sk_test_`. Иначе помечаются как skipped.
+  - Пример запуска:
     ```powershell
     $env:STRIPE_SECRET_KEY="sk_test_..."
     $env:STRIPE_PUBLIC_KEY="pk_test_..."
     python manage.py test shop.tests.test_stripe_integration -v 2
     ```
-  - Тесты создают настоящие Checkout Session в режиме теста и проверяют корректный `session.id`.
+  - Тесты создают настоящие Checkout Session в тестовом режиме и проверяют корректный `session.id`.
 
 ## Docker (опционально)
-При необходимости могу добавить `Dockerfile` и `docker-compose.yml` с конфигурированием через переменные окружения.
+Опционально могут быть добавлены `Dockerfile` и `docker-compose.yml` с конфигурацией через переменные окружения.
 
 ## Деплой
 - Подходит любой PaaS (Railway, Render, Fly.io, Dokku, Heroku-like) или VPS
@@ -102,4 +102,4 @@ python manage.py runserver 0.0.0.0:8000
 - Для оплаты создайте хотя бы один `Item` и используйте страницу `/item/{id}/`
 
 ## Лицензия
-MIT (по желанию можно изменить)
+MIT

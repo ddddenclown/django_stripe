@@ -80,7 +80,6 @@ def buy_order(request, id: int):
 		if order.discount_percent:
 			coupon = stripe.Coupon.create(percent_off=order.discount_percent, duration='once')
 			create_kwargs["discounts"] = [{"coupon": coupon.id}]
-		# Note: tax_percent is not directly applied here; configure Stripe automatic tax in Dashboard if needed
 		session = stripe.checkout.Session.create(**create_kwargs)
 		return JsonResponse({'id': session.id})
 	except Exception as e:

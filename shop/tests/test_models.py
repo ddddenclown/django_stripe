@@ -24,6 +24,5 @@ class OrderModelTests(TestCase):
 		order = Order.objects.create(currency='usd', discount_percent=10, tax_percent=20)
 		order.items.add(self.item1)
 		total = order.calculate_totals()
-		# 1000 -> minus 10% = 900 -> plus 20% = 1080
 		self.assertEqual(total, 1080)
 		self.assertEqual(order.total_price, 1080)

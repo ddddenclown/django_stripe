@@ -16,6 +16,7 @@ dist/
 
 # Django
 /db.sqlite3
+/*.sqlite3
 /staticfiles/
 /media/
 
@@ -44,3 +45,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Legacy scaffolds
+/test_django/

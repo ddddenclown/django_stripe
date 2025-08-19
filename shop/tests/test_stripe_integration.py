@@ -14,7 +14,6 @@ HAS_STRIPE_TEST_KEY = os.getenv('STRIPE_SECRET_KEY', '').startswith('sk_test_')
 @skipUnless(HAS_STRIPE_TEST_KEY, 'No STRIPE_SECRET_KEY provided; skipping Stripe integration tests')
 class StripeIntegrationTests(TestCase):
 	def setUp(self):
-		# Ensure stripe uses real test key
 		stripe.api_key = os.environ['STRIPE_SECRET_KEY']
 		self.item = Item.objects.create(name='RealX', price=700, currency='usd', description='integration')
 

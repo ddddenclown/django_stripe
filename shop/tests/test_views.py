@@ -21,7 +21,6 @@ class ViewTests(TestCase):
 		resp = self.client.get(reverse('buy_item', args=[self.item.id]))
 		self.assertEqual(resp.status_code, 200)
 		self.assertJSONEqual(resp.content, {"id": "cs_test_123"})
-		# ensure called with expected line_items
 		args, kwargs = mock_create.call_args
 		self.assertIn('line_items', kwargs)
 		self.assertEqual(kwargs['line_items'][0]['price_data']['unit_amount'], 500)
@@ -38,9 +37,7 @@ class ViewTests(TestCase):
 		resp = self.client.get(reverse('buy_order', args=[order.id]))
 		self.assertEqual(resp.status_code, 200)
 		self.assertJSONEqual(resp.content, {"id": "cs_test_order"})
-		# coupon created
 		mock_coupon_create.assert_called_once()
-		# discounts passed to session
 		_, kwargs = mock_session_create.call_args
 		self.assertIn('discounts', kwargs)
 		self.assertEqual(kwargs['discounts'][0]['coupon'], 'coupon_123')

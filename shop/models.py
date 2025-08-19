@@ -26,7 +26,6 @@ class Order(models.Model):
 	total_price = models.IntegerField(default=0, help_text='Total in minor units')
 	currency = models.CharField(max_length=3, choices=Item.CURRENCY_CHOICES, default='usd')
 
-	# Optional simple discount/tax fields for demo
 	discount_percent = models.PositiveIntegerField(default=0)
 	tax_percent = models.PositiveIntegerField(default=0)
 
